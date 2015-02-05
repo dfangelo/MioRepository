@@ -19,7 +19,6 @@ namespace Library
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.T_USER = new HashSet<T_USER>();
         }
     
         public string Id { get; set; }
@@ -38,6 +37,6 @@ namespace Library
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        public virtual ICollection<T_USER> T_USER { get; set; }
+        public virtual T_USER T_USER { get; set; }
     }
 }

@@ -16,6 +16,11 @@
         <EntityTypeShape EntityType="Model.T_USER" Width="1.5" PointX="3.375" PointY="6.75" />
         <AssociationConnector Association="Model.AspNetUserT_USER" />
       </Diagram>
+      <Diagram DiagramId="430f31b313944064ad4b6963391092d3" Name="Diagram" >
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.T_USER" Width="1.5" PointX="2.875" PointY="1.125" FillColor="Red" />
+        <AssociationConnector Association="Model.AspNetUserT_USER" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
