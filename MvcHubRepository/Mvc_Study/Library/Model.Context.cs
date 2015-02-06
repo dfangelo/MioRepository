@@ -30,6 +30,7 @@ namespace Library
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<T_ARTIST> T_ARTIST { get; set; }
         public virtual DbSet<T_USER> T_USER { get; set; }
     }
 }

@@ -66,6 +66,16 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="T_ARTIST">
+          <Key>
+            <PropertyRef Name="ART_IDUSER" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AKA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URIMG" Type="nvarchar(max)" />
+          <Property Name="ART_IDCREW" Type="int" />
+          <Property Name="ART_IDUSER" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="T_USER">
           <Key>
             <PropertyRef Name="US_IDASPNETUSERS" />
@@ -74,7 +84,6 @@
           <Property Name="NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="SURNAME" Type="nvarchar" MaxLength="50" />
           <Property Name="URIMG" Type="nvarchar(max)" />
-          <Property Name="US_IDART" Type="int" />
           <Property Name="US_IDASPNETUSERS" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -140,6 +149,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_ARTIST" EntityType="Self.T_ARTIST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_USER" EntityType="Self.T_USER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -272,12 +282,28 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="T_ARTIST" EntityType="Model.T_ARTIST" />
           <EntitySet Name="T_USER" EntityType="Model.T_USER" />
           <AssociationSet Name="AspNetUserT_USER" Association="Model.AspNetUserT_USER">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="T_USER" EntitySet="T_USER" />
           </AssociationSet>
+          <AssociationSet Name="T_ARTISTT_USER" Association="Model.T_ARTISTT_USER">
+            <End Role="T_ARTIST" EntitySet="T_ARTIST" />
+            <End Role="T_USER" EntitySet="T_USER" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="T_ARTIST">
+          <Key>
+            <PropertyRef Name="ART_IDUSER" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AKA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URIMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ART_IDCREW" Type="Int32" />
+          <Property Name="ART_IDUSER" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_USER" Relationship="Model.T_ARTISTT_USER" FromRole="T_ARTIST" ToRole="T_USER" />
+        </EntityType>
         <EntityType Name="T_USER">
           <Key>
             <PropertyRef Name="US_IDASPNETUSERS" />
@@ -286,9 +312,9 @@
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="URIMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="US_IDART" Type="Int32" />
           <Property Name="US_IDASPNETUSERS" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Model.AspNetUserT_USER" FromRole="T_USER" ToRole="AspNetUser" />
+          <NavigationProperty Name="T_ARTIST" Relationship="Model.T_ARTISTT_USER" FromRole="T_USER" ToRole="T_ARTIST" />
         </EntityType>
         <Association Name="AspNetUserT_USER">
           <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -299,6 +325,18 @@
             </Principal>
             <Dependent Role="T_USER">
               <PropertyRef Name="US_IDASPNETUSERS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="T_ARTISTT_USER">
+          <End Type="Model.T_ARTIST" Role="T_ARTIST" Multiplicity="1" />
+          <End Type="Model.T_USER" Role="T_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ARTIST">
+              <PropertyRef Name="ART_IDUSER" />
+            </Principal>
+            <Dependent Role="T_USER">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -371,11 +409,21 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="T_ARTIST">
+            <EntityTypeMapping TypeName="Model.T_ARTIST">
+              <MappingFragment StoreEntitySet="T_ARTIST">
+                <ScalarProperty Name="ART_IDUSER" ColumnName="ART_IDUSER" />
+                <ScalarProperty Name="ART_IDCREW" ColumnName="ART_IDCREW" />
+                <ScalarProperty Name="URIMG" ColumnName="URIMG" />
+                <ScalarProperty Name="AKA" ColumnName="AKA" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="T_USER">
             <EntityTypeMapping TypeName="Model.T_USER">
               <MappingFragment StoreEntitySet="T_USER">
                 <ScalarProperty Name="US_IDASPNETUSERS" ColumnName="US_IDASPNETUSERS" />
-                <ScalarProperty Name="US_IDART" ColumnName="US_IDART" />
                 <ScalarProperty Name="URIMG" ColumnName="URIMG" />
                 <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />

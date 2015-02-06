@@ -13,13 +13,15 @@
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.T_USER" Width="1.5" PointX="3.375" PointY="6.75" />
-        <AssociationConnector Association="Model.AspNetUserT_USER" />
+        <AssociationConnector Association="Model.T_USERT_ARTIST" />
       </Diagram>
-      <Diagram DiagramId="430f31b313944064ad4b6963391092d3" Name="Diagram" >
+      <Diagram DiagramId="430f31b313944064ad4b6963391092d3" Name="Diagram" ZoomLevel="99" >
         <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="Model.T_USERT_ARTIST" />
+        <EntityTypeShape EntityType="Model.T_ARTIST" Width="1.5" PointX="5.375" PointY="0.75" FillColor="Red" />
         <EntityTypeShape EntityType="Model.T_USER" Width="1.5" PointX="2.875" PointY="1.125" FillColor="Red" />
         <AssociationConnector Association="Model.AspNetUserT_USER" />
+        <AssociationConnector Association="Model.T_ARTISTT_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

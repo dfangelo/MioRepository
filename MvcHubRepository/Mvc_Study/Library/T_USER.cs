@@ -18,9 +18,9 @@ namespace Library
         public string NAME { get; set; }
         public string SURNAME { get; set; }
         public string URIMG { get; set; }
-        public Nullable<int> US_IDART { get; set; }
         public string US_IDASPNETUSERS { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual T_ARTIST T_ARTIST { get; set; }
     }
 }

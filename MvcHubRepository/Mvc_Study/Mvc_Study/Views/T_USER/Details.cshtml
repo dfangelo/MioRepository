@@ -1,0 +1,58 @@
+﻿@model Library.T_USER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_USER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SURNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SURNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URIMG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URIMG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_ARTIST.AKA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_ARTIST.AKA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.US_IDASPNETUSERS }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
